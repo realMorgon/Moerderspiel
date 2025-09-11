@@ -13,8 +13,8 @@ def test_sessiondata():
     retrieved_session = get_session(session_id)
     assert retrieved_session == session
     assert retrieved_session.name == "Test Session"
-    assert retrieved_session.start_date == datetime.datetime(2024, 1, 1, 1, 0)
-    assert retrieved_session.end_date == datetime.datetime(2024, 1, 1, 2, 0)
+    assert datetime.datetime.fromisoformat(retrieved_session.start_date) == datetime.datetime(2024, 1, 1, 1, 0)
+    assert datetime.datetime.fromisoformat(retrieved_session.end_date) == datetime.datetime(2024, 1, 1, 2, 0)
 
     test_user = create_user("Andi")
     session.add_user(test_user.id)
