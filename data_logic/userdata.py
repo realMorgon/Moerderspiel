@@ -1,7 +1,7 @@
 import json
 from pydantic import BaseModel
 from pathlib import Path
-from paths import USER_DATA
+from data_logic.paths import USER_DATA
 import uuid
 
 class User(BaseModel):
@@ -15,14 +15,13 @@ def save_user(user:User):
         json.dump(data, file, indent = 2)
 
 def create_user(name: str) -> User:
-    id = str(uuid.uuid4())
-    user = User(name=name, id=id)
+    user_id = str(uuid.uuid4())
+    user = User(name=name, id=user_id)
     save_user(user=user)
     return user
 
-def get_user(id: str) -> User:
-    path = Path(USER_DATA) / f"{id}.json"
+def get_user(user_id: str) -> User:
+    path = Path(USER_DATA) / f"{user_id}.json"
     with open(path, "r") as file:
         data = json.load(file)
-    user = User(**data)
-    return user
+    return User(**data)

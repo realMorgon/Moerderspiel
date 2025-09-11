@@ -15,5 +15,5 @@ USER_DATA = DATA / "user"
 SESSION_DATA = DATA / "session"
 
 def ensure_dirs() -> None:
-    for dir in (USER_DATA, SESSION_DATA):
-        dir.mkdir(parents=True, exist_ok=True)
+    for directory in (USER_DATA, SESSION_DATA):
+        directory.mkdir(parents=True, exist_ok=True)
