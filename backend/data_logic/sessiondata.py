@@ -2,7 +2,7 @@ import json
 import uuid
 from pydantic import BaseModel
 import datetime
-from data_logic.paths import SESSION_DATA
+from backend.data_logic.paths import SESSION_DATA
 
 
 class Session(BaseModel):

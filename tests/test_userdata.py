@@ -1,5 +1,5 @@
-from data_logic.userdata import create_user, get_user
-from data_logic.paths import ensure_dirs
+from backend.data_logic.userdata import create_user, get_user
+from backend.data_logic.paths import ensure_dirs
 
 def test_userdata():
     ensure_dirs()

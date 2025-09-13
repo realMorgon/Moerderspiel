@@ -1,8 +1,8 @@
 import datetime
 
-from data_logic.paths import ensure_dirs
-from data_logic.sessiondata import create_session, get_session
-from data_logic.userdata import create_user
+from backend.data_logic.paths import ensure_dirs
+from backend.data_logic.sessiondata import create_session, get_session
+from backend.data_logic.userdata import create_user
 
 
 def test_sessiondata():
