@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+</head>
+<body>
+
+    {% if user %}
+        <p>Welcome back, {{ user.name }}!</p>
+    {% else %}
+        <h1>Welcome to the Homepage</h1>
+        <p>Please <a href="/create_user">create an account</a> to get started.</p>
+    {% endif %}
+
+</body>
+</html>
