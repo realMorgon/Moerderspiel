@@ -16,7 +16,7 @@ def test_sessiondata():
     assert datetime.datetime.fromisoformat(retrieved_session.start_date) == datetime.datetime(2024, 1, 1, 1, 0)
     assert datetime.datetime.fromisoformat(retrieved_session.end_date) == datetime.datetime(2024, 1, 1, 2, 0)
 
-    test_user = create_user("Andi")
+    test_user = create_user(name="Cris", password="password", email="mail@test.de", force=True)
     session.add_user(test_user.id)
     assert test_user.id in session.user_ids
     session.remove_user(test_user.id)
