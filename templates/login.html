@@ -6,6 +6,10 @@
 </head>
 <body>
 
+    {% if error %}
+        <p>Your username or password are wrong</p>
+    {% endif %}
+
     <form method="post" action="/login">
         <label for="name">Username:</label>
         <input type="text" id="name" name="name" required><br>

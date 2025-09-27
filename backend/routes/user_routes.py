@@ -34,4 +34,4 @@ def login_route():
         session['user_id'] = user.id
         return redirect(url_for('general_routes.index'))
 
-    return None
+    return render_template('login.html', error=True)
