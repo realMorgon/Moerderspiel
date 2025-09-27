@@ -3,11 +3,12 @@ import uuid
 from pydantic import BaseModel
 import datetime
 from backend.data_logic.paths import SESSION_DATA
+from data_logic.userdata import User
 
 
 class Session(BaseModel):
     id: str
-    user_ids: list[str] = []
+    users: dict[User, bool] = {}
     active: bool
     name: str
     start_date: str
@@ -15,7 +16,7 @@ class Session(BaseModel):
 
     def add_user(self, user_id: str):
         if user_id not in self.user_ids:
-            self.user_ids.append(user_id)
+            self.user_ids.append(user_id, True)
 
     def remove_user(self, user_id: str):
         if user_id in self.user_ids:
@@ -36,6 +37,6 @@ def get_session(session_id: str) -> Session:
 
 def create_session(name: str, start_date: datetime.datetime, end_date: datetime.datetime) -> Session:
     session_id = str(uuid.uuid4())
-    session = Session(id=session_id, name=name, active=True, user_ids=[], start_date=start_date.isoformat(), end_date=end_date.isoformat())
+    session = Session(id=session_id, name=name, active=True, start_date=start_date.isoformat(), end_date=end_date.isoformat())
     save_session(session=session)
     return session

@@ -6,11 +6,12 @@
 </head>
 <body>
 
-    {% if user %}
-        <p>Welcome back, {{ user.name }}!</p>
+    {% if user_name %}
+        <p>Welcome back, {{ user_name }}!</p>
     {% else %}
         <h1>Welcome to the Homepage</h1>
         <p>Please <a href="/create_user">create an account</a> to get started.</p>
+        <p>Or <a href="/login">log in</a>.</p>
     {% endif %}
 
 </body>

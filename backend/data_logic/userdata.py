@@ -37,3 +37,11 @@ def get_user(user_id: str) -> User:
     with open(path, "r") as file:
         data = json.load(file)
     return User(**data)
+
+def get_user_by_name(user_name: str) -> User | None:
+    for json_file in USER_DATA.glob("*.json"):
+        with open(json_file, "r") as data_file:
+            data = json.load(data_file)
+            if data["name"] == user_name:
+                return User(**data)
+    return None
