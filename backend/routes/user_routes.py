@@ -35,3 +35,8 @@ def login_route():
         return redirect(url_for('general_routes.index'))
 
     return render_template('login.html', error=True)
+
+@user_bp.route('/logout', methods=['POST'])
+def logout_route():
+    session.clear()
+    return redirect(url_for('general_routes.index'))

@@ -8,11 +8,18 @@
 
     {% if user_name %}
         <p>Welcome back, {{ user_name }}!</p>
+    <form method="post" action="/logout">
+        <input type="submit" value="Logout">
+    </form>
     {% else %}
         <h1>Welcome to the Homepage</h1>
         <p>Please <a href="/create_user">create an account</a> to get started.</p>
         <p>Or <a href="/login">log in</a>.</p>
     {% endif %}
+
+    <form method="get" action="/create_session">
+        <input type="submit" value="Create Session">
+    </form>
 
 </body>
 </html>

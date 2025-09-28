@@ -1,3 +1,5 @@
+flask-session2
+python-dotenv
 flask
 bcrypt
 pydantic==2.11.7

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Session</title>
+</head>
+<body>
+
+    <h1>Create Session</h1>
+    <form method="post" action="/create_session">
+        <label for="session_name">Session Name:</label>
+        <input type="text" id="session_name" name="session_name" required><br><br>
+
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+
+        <input type="submit" value="Create Session">
+    </form>
+
+</body>
+</html>

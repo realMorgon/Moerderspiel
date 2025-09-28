@@ -3,7 +3,7 @@ import uuid
 from pydantic import BaseModel
 import datetime
 from backend.data_logic.paths import SESSION_DATA
-from data_logic.userdata import User
+from backend.data_logic.userdata import User
 
 
 class Session(BaseModel):
