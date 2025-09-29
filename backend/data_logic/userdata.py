@@ -10,12 +10,23 @@ class User(BaseModel):
     name: str
     password_hash: str
     email : str
+    session_ids: dict[str, bool] = {}
 
-def save_user(user:User):
-    data = user.model_dump()
-    path = Path(USER_DATA) / f"{user.id}.json" 
-    with open(path, 'w') as file:
-        json.dump(data, file, indent = 2)
+    def add_session(self, session_id: str):
+        if session_id not in self.session_ids:
+            self.session_ids[session_id] = True
+            self.save()
+
+    def set_session_active(self, session_id: str, active: bool):
+        if session_id in self.session_ids:
+            self.session_ids[session_id] = active
+            self.save()
+
+    def save(self):
+        data = self.model_dump()
+        path = Path(USER_DATA) / f"{self.id}.json"
+        with open(path, 'w') as file:
+            json.dump(data, file, indent = 2)
 
 def create_user(name: str, password: str, email:str, force:bool) -> User:
     if not force:
@@ -29,7 +40,7 @@ def create_user(name: str, password: str, email:str, force:bool) -> User:
     user_id = str(uuid.uuid4())
     password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
     user = User(name=name, id=user_id, password_hash=password_hash, email=email)
-    save_user(user=user)
+    user.save()
     return user
 
 def get_user(user_id: str) -> User:

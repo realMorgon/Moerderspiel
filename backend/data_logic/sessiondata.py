@@ -1,14 +1,16 @@
 import json
 import uuid
+from typing import List
+
 from pydantic import BaseModel
 import datetime
 from backend.data_logic.paths import SESSION_DATA
-from backend.data_logic.userdata import User
 
 
 class Session(BaseModel):
     id: str
-    users: dict[User, bool] = {}
+    user_ids: List[str] = []
+    targets: dict[str, str] = {}
     active: bool
     name: str
     start_date: str
@@ -16,17 +18,19 @@ class Session(BaseModel):
 
     def add_user(self, user_id: str):
         if user_id not in self.user_ids:
-            self.user_ids.append(user_id, True)
+            self.user_ids.append(user_id)
+            self.save()
 
     def remove_user(self, user_id: str):
         if user_id in self.user_ids:
             self.user_ids.remove(user_id)
+            self.save()
 
-def save_session(session: Session):
-    path = SESSION_DATA / f"{session.id}.json"
-    data = session.model_dump()
-    with open(path, 'w') as file:
-        json.dump(data, file, indent=2)
+    def save(self):
+        path = SESSION_DATA / f"{self.id}.json"
+        data = self.model_dump()
+        with open(path, 'w') as file:
+            json.dump(data, file, indent=2)
 
 
 def get_session(session_id: str) -> Session:
@@ -38,5 +42,5 @@ def get_session(session_id: str) -> Session:
 def create_session(name: str, start_date: datetime.datetime, end_date: datetime.datetime) -> Session:
     session_id = str(uuid.uuid4())
     session = Session(id=session_id, name=name, active=True, start_date=start_date.isoformat(), end_date=end_date.isoformat())
-    save_session(session=session)
+    session.save()
     return session
